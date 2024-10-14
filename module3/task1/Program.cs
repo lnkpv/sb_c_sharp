@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace module2
+namespace task1
 {
     internal class Program
     {
