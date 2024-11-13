@@ -103,6 +103,23 @@ namespace task1
             var workers = GetAllWorkers();
             return workers.Where(w => w.DateAdded >= dateFrom && w.DateAdded <= dateTo).ToArray();
         }
+
+        public Worker[] GetAllWorkersSorted(string sortBy)
+        {
+            var workers = GetAllWorkers();
+
+            if (sortBy == "1")
+                return workers.OrderBy(w => w.Id).ToArray();
+            else if (sortBy == "2")
+                return workers.OrderBy(w => w.FIO).ToArray();
+            else if (sortBy == "3")
+                return workers.OrderBy(w => w.Age).ToArray();
+            else if (sortBy == "4")
+                return workers.OrderBy(w => w.Height).ToArray();
+            else
+                return workers.OrderBy(w => w.DateAdded).ToArray();
+
+        }
     }
 
     internal class Program
@@ -123,7 +140,17 @@ namespace task1
 
                 if (choice == "1")
                 {
-                    DisplayEmployeesList(repository.GetAllWorkers());
+                    Console.WriteLine("Сортировать по:");
+                    Console.WriteLine("1 - ID");
+                    Console.WriteLine("2 - Ф.И.О.");
+                    Console.WriteLine("3 - Возраст");
+                    Console.WriteLine("4 - Рост");
+                    Console.WriteLine("5 - Дата добавления");
+                    string sortBy = Console.ReadLine();
+                    if (sortBy != "1" && sortBy != "2" && sortBy != "3" && sortBy != "4" && sortBy != "5")
+                        Console.WriteLine("Неверный параметр.");
+                    else
+                        DisplayEmployeesList(repository.GetAllWorkersSorted(sortBy));
                 }
                 else if (choice == "2")
                 {
